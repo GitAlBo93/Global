@@ -11,9 +11,27 @@ let letter = "s";
 }    
 console.log(summ);
 
+let conteiner = document.createElement('div');
+conteiner.className = "conteiner";
+document.body.prepend(conteiner);
 
+let tree = document.createElement('div');
+tree.className="tree";
+let conteinerTask=document.createElement('div');
+conteinerTask.className="conteinerTask";
+conteiner.prepend(tree,conteinerTask);
 
+let imgTree=document.createElement('div');
+imgTree.className="imgTree";
+let attempts=document.createElement('div');
+attempts.className="attempts";
+tree.prepend(imgTree,attempts);
 
+let task=document.createElement('div');
+task.className="task";
+let keyboard=document.createElement('div');
+keyboard.className="keyboard";
+conteinerTask.prepend(task,keyboard);
 
 // Задача поиска min max в массиве
 
