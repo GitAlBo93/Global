@@ -80,6 +80,8 @@ body{
     text-align: center;
     font-size: 46px;
     margin: 40px;
+    display: flex;
+    flex-direction: row;
 }
 
 .mystery{

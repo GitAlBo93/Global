@@ -41,7 +41,7 @@ par3.className="par3";
 par3.id="parId3";
 imgTree.prepend(par1,par2,par3);
 
-document.getElementById("word").innerHTML="Ответ";
+// document.getElementById("word").innerHTML="Ответ";
 document.getElementById("mystery").innerHTML="Текст загадки";
 document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
 document.getElementById("parId1").innerHTML="Попытка 1";
@@ -58,8 +58,26 @@ async function go (){
     let respjson = await responsed();
     console.log(respjson);
     let mystery1 = respjson[0];
+    let mass=Array.from(mystery1.answer);
     document.getElementById("mystery").innerHTML=mystery1.mystery;
-    document.getElementById("word").innerHTML=mystery1.answer;
+    // document.getElementById("word").innerHTML=mass;
+    // document.getElementById("word").innerHTML=mystery1.answer;
+
+    
+    console.log(mass.length);
+
+    for (let i = 0; i < mass.length; i++) {
+        // const element = array[i];
+        let masDiv = document.createElement('div');
+        masDiv.className="masDiv" + i;
+        masDiv.innerHTML=mass[i];
+        word.append(masDiv);
+        
+            // let parMasWord = document.createElement('p');
+            // parMasWord.innerHTML=masDiv;
+            // masDiv.prepend(parMasWord);
+        
+    }
 }
 
 go();
