@@ -26,12 +26,16 @@ body{
     background-color: aqua;
     border: 2px solid black;
     height: 80%;
-
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
 }
 .attempts{
     background-color: #05386b;
     border: 2px solid black;
     height: 18%;
+    padding: 20px;
 }
 .conteinerTask{
     background-color: #EDF5E1;
@@ -46,9 +50,39 @@ body{
     background-color: #4E4E50;
     border: 2px solid black;
     height: 65%;
+    padding: 20px;
 }
 .keyboard{
     background-color: #5D5C61;
     border: 2px solid black;
     height: 35%;
+}
+
+.attempts{
+    text-align: center;
+    color: #EDF5E1;
+    font-size: 26px;
+
+}
+
+.Er{
+    flex-direction: column;
+    justify-content: end;
+    place-items: flex-end;
+}
+
+.word,
+.mystery {
+    color: #EDF5E1;
+}
+
+.word{
+    text-align: center;
+    font-size: 46px;
+    margin: 40px;
+}
+
+.mystery{
+    margin: 20px;
+    font-size: 26px;
 }
