@@ -10,6 +10,9 @@ let word=document.createElement('div');
 let par1=document.createElement('p');
 let par2=document.createElement('p');
 let par3=document.createElement('p');
+let strKey1=document.createElement('div');
+let strKey2=document.createElement('div');
+let strKey3=document.createElement('div');
 let Er=3;
 
 conteiner.className = "conteiner";
@@ -26,6 +29,11 @@ tree.prepend(imgTree,attempts);
 task.className="task";
 keyboard.className="keyboard";
 conteinerTask.prepend(task,keyboard);
+
+strKey1.className="strKey";
+strKey2.className="strKey";
+strKey3.className="strKey";
+keyboard.prepend(strKey1,strKey2,strKey3);
 
 mystery.className="mystery";
 mystery.id="mystery";
@@ -82,6 +90,49 @@ async function go (){
 
 go();
 
+
+const keyboardLetter = [1081, 1094, 1091, 1082, 1077, 1085, 1075, 1096, 1097, 1079, 1093, 1098,
+    1092, 1099, 1074, 1072, 1087, 1088, 1086, 1083, 1076, 1078, 1101, 1103, 1095, 1089, 1084,
+     1080, 1090, 1100, 1073, 1102];
+
+function addKeybord() {
+   for (let i = 0; i < 12; i++) {
+       let masDiv = document.createElement('div');
+       masDiv.className="keyButton";
+       masDiv.id="keyButton"+[i];
+       masDiv.dataset.data=keyboardLetter[i];
+       masDiv.innerHTML=String.fromCharCode(keyboardLetter[i]);
+       strKey1.append(masDiv);
+    }
+    for (let i = 12; i < 23; i++) {
+       let masDiv = document.createElement('div');
+       masDiv.className="keyButton";
+       masDiv.id="keyButton"+[i];
+       masDiv.dataset.data=keyboardLetter[i];
+       masDiv.innerHTML=String.fromCharCode(keyboardLetter[i]);
+       strKey2.append(masDiv);
+    }
+    for (let i = 23; i < keyboardLetter.length; i++) {
+       let masDiv = document.createElement('div');
+       masDiv.className="keyButton";
+       masDiv.id="keyButton"+[i];
+       masDiv.dataset.data=keyboardLetter[i];
+       masDiv.innerHTML=String.fromCharCode(keyboardLetter[i]);
+       strKey3.append(masDiv);
+    }
+}
+addKeybord();
+
+document.addEventListener ('keypress', (event) => {
+    document.querySelector('.keyButton[data="' + event.keyCode + '"]').classList.add('active');
+    // keyboardletter.push(event.charCode);
+    // console.log(keyboardletter); 
+});
+
+// GlobalEventHandlers.onkeypress = function (event) {
+//     console.log(event);
+//     // keyboard.push=(event.charCode);
+// }
 
 // Задача поиска min max в массиве
 
