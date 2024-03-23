@@ -78,27 +78,24 @@ async function go (){
         // const element = array[i];
         let masAnswer = document.createElement('div');
         masAnswer.className="masAnswer" + i;
-        masAnswer.innerHTML=jsonAnswer[i];
+        masAnswer.innerHTML="___";
+        masAnswer.dataset.answer=jsonAnswer[i];
         word.append(masAnswer);
-        
-            // let parMasWord = document.createElement('p');
-            // parMasWord.innerHTML=masDiv;
-            // masDiv.prepend(parMasWord);
 
-
-    }
-
-        
         document.addEventListener ('keypress', (keyKeybord) => {
-        document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
-        for (let j = 0; j < jsonAnswer.length; j++) {
-            if (keyKeybord.key == jsonAnswer[j]) {
+            document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+                if (keyKeybord.key == jsonAnswer[i]) {
+                    document.querySelector('[data-answer="' + jsonAnswer[i] + '"]').innerHTML=jsonAnswer[i];
+                    console.log("Буква  " + keyKeybord.key + " = " + jsonAnswer[i]);
+                    console.log(jsonAnswer);
+                }   
+        });
 
-            console.log("Буква  " + keyKeybord.key + " = " + jsonAnswer[j]);
     }
-            
-        }
-    });
+console.log(jsonAnswer);
+
+
+   
 
     
 }

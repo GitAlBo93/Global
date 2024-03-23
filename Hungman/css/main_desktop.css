@@ -108,6 +108,7 @@ flex-direction: row;
     margin: 40px;
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 .mystery{
