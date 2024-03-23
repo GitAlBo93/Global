@@ -30,9 +30,9 @@ task.className="task";
 keyboard.className="keyboard";
 conteinerTask.prepend(task,keyboard);
 
-strKey1.className="strKey";
-strKey2.className="strKey";
-strKey3.className="strKey";
+strKey1.className="strKey strKey1";
+strKey2.className="strKey strKey2";
+strKey3.className="strKey strKey3";
 keyboard.prepend(strKey1,strKey2,strKey3);
 
 mystery.className="mystery";
@@ -63,30 +63,57 @@ async function responsed (){
 
 async function go (){
   
-    let respjson = await responsed();
-    console.log(respjson);
-    let mystery1 = respjson[0];
-    let mass=Array.from(mystery1.answer);
+    let jsonPars = await responsed();
+    console.log(jsonPars);
+    let mystery1 = jsonPars[0];
+    let jsonAnswer=Array.from(mystery1.answer);
     document.getElementById("mystery").innerHTML=mystery1.mystery;
     // document.getElementById("word").innerHTML=mass;
     // document.getElementById("word").innerHTML=mystery1.answer;
 
     
-    console.log(mass.length);
+    console.log(jsonAnswer.length);
 
-    for (let i = 0; i < mass.length; i++) {
+    for (let i = 0; i < jsonAnswer.length; i++) {
         // const element = array[i];
-        let masDiv = document.createElement('div');
-        masDiv.className="masDiv" + i;
-        masDiv.innerHTML=mass[i];
-        word.append(masDiv);
+        let masAnswer = document.createElement('div');
+        masAnswer.className="masAnswer" + i;
+        masAnswer.innerHTML=jsonAnswer[i];
+        word.append(masAnswer);
         
             // let parMasWord = document.createElement('p');
             // parMasWord.innerHTML=masDiv;
             // masDiv.prepend(parMasWord);
-        
+
+
     }
+
+        
+        document.addEventListener ('keypress', (keyKeybord) => {
+        document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+        for (let j = 0; j < jsonAnswer.length; j++) {
+            if (keyKeybord.key == jsonAnswer[j]) {
+
+            console.log("Буква  " + keyKeybord.key + " = " + jsonAnswer[j]);
+    }
+            
+        }
+    });
+
+    
 }
+
+// let word = ["m","a","s","s","i","v","s"];
+// let summ=0;
+// let letter = "s";
+
+//     for (let j = 0; j < word.length; j++) {
+//     console.log(word[j]);
+//         if (word[j]== letter) {
+//         summ++;
+//             console.log(word[j] +"="+ letter);
+//         }
+// }    
 
 go();
 
@@ -97,37 +124,37 @@ const keyboardLetter = [1081, 1094, 1091, 1082, 1077, 1085, 1075, 1096, 1097, 10
 
 function addKeybord() {
    for (let i = 0; i < 12; i++) {
-       let masDiv = document.createElement('div');
-       masDiv.className="keyButton";
-       masDiv.id="keyButton"+[i];
-       masDiv.dataset.data=keyboardLetter[i];
-       masDiv.innerHTML=String.fromCharCode(keyboardLetter[i]);
-       strKey1.append(masDiv);
+       let masKeybord = document.createElement('div');
+       masKeybord.className="keyButton";
+       masKeybord.id="keyButton"+[i];
+       masKeybord.dataset.data=keyboardLetter[i];
+       masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
+       strKey1.append(masKeybord);
     }
     for (let i = 12; i < 23; i++) {
-       let masDiv = document.createElement('div');
-       masDiv.className="keyButton";
-       masDiv.id="keyButton"+[i];
-       masDiv.dataset.data=keyboardLetter[i];
-       masDiv.innerHTML=String.fromCharCode(keyboardLetter[i]);
-       strKey2.append(masDiv);
+        let masKeybord = document.createElement('div');
+        masKeybord.className="keyButton";
+        masKeybord.id="keyButton"+[i];
+        masKeybord.dataset.data=keyboardLetter[i];
+        masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
+        strKey2.append(masKeybord);
     }
     for (let i = 23; i < keyboardLetter.length; i++) {
-       let masDiv = document.createElement('div');
-       masDiv.className="keyButton";
-       masDiv.id="keyButton"+[i];
-       masDiv.dataset.data=keyboardLetter[i];
-       masDiv.innerHTML=String.fromCharCode(keyboardLetter[i]);
-       strKey3.append(masDiv);
+        let masKeybord = document.createElement('div');
+        masKeybord.className="keyButton";
+        masKeybord.id="keyButton"+[i];
+        masKeybord.dataset.data=keyboardLetter[i];
+        masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
+        strKey3.append(masKeybord);
     }
 }
 addKeybord();
 
-document.addEventListener ('keypress', (event) => {
-    document.querySelector('.keyButton[data="' + event.keyCode + '"]').classList.add('active');
-    // keyboardletter.push(event.charCode);
-    // console.log(keyboardletter); 
-});
+// document.addEventListener ('keypress', (keyKeybord) => {
+//     document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+//     console.log(keyKeybord.key); 
+// });
+
 
 // GlobalEventHandlers.onkeypress = function (event) {
 //     console.log(event);
@@ -152,16 +179,6 @@ document.addEventListener ('keypress', (event) => {
 // }
 // console.log("min=" + min + "  max=" + max);
 
-// let word = ["m","a","s","s","i","v","s"];
-// let summ=0;
-// let letter = "s";
 
-//     for (let j = 0; j < word.length; j++) {
-//     console.log(word[j]);
-//         if (word[j]== letter) {
-//         summ++;
-//             console.log(word[j] +"="+ letter);
-//         }
-// }    
 // console.log(summ);
 
