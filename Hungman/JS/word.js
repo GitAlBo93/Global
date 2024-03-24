@@ -13,7 +13,8 @@ let par3=document.createElement('p');
 let strKey1=document.createElement('div');
 let strKey2=document.createElement('div');
 let strKey3=document.createElement('div');
-let Er=3;
+let Er=0;
+let answer;
 
 conteiner.className = "conteiner";
 document.body.prepend(conteiner);
@@ -68,6 +69,7 @@ async function go (){
     let mystery1 = jsonPars[0];
     let jsonAnswer=Array.from(mystery1.answer);
     document.getElementById("mystery").innerHTML=mystery1.mystery;
+    answer=jsonAnswer;
     // document.getElementById("word").innerHTML=mass;
     // document.getElementById("word").innerHTML=mystery1.answer;
 
@@ -81,32 +83,38 @@ async function go (){
         masAnswer.innerHTML="___";
         masAnswer.dataset.answer=jsonAnswer[i];
         word.append(masAnswer);
-        click();
+        
 
     }
     
-    function click (){
 
-            document.addEventListener ('keypress', (keyKeybord) => {
-                document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
-
-                for (let i = 0; i < jsonAnswer.length; i++) {
-            
-                    if (keyKeybord.key == jsonAnswer[i]) {
-                        document.querySelector('[data-answer="' + jsonAnswer[i] + '"]').innerHTML=jsonAnswer[i];
-                        console.log("Буква  " + keyKeybord.key + " = " + jsonAnswer[i]);
-                        console.log(jsonAnswer);
-                         let clickKey=String.fromCharCode(jsonAnswer[i]);
-                         console.log("clicKey" + clickKey);
-                    }     
-                }
-            });
-    }
 
 console.log(jsonAnswer);
   
 }
+click();
 
+function click (){
+
+    document.addEventListener ('keypress', (keyKeybord) => {
+        document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+
+        for (let i = 0; i < answer.length; i++) {
+    
+            if (keyKeybord.key == answer[i]) {
+                document.querySelector('[data-answer="' + answer[i] + '"]').innerHTML=answer[i];
+                console.log("Буква  " + keyKeybord.key + " = " + answer[i]);
+                console.log(answer);
+                 let clickKey=String.fromCharCode(answer[i]);
+                 console.log("clicKey" + clickKey);
+            }  else
+            {
+                Er++;
+                console.log(Er);
+            }   
+        }
+    });
+}
 // let word = ["m","a","s","s","i","v","s"];
 // let summ=0;
 // let letter = "s";
