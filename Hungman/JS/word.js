@@ -81,17 +81,30 @@ async function go (){
         masAnswer.innerHTML="___";
         masAnswer.dataset.answer=jsonAnswer[i];
         word.append(masAnswer);
-
+        let keyClick;
+        let summ =0;
         document.addEventListener ('keypress', (keyKeybord) => {
             document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
-                if (keyKeybord.key == jsonAnswer[i]) {
-                    document.querySelector('[data-answer="' + jsonAnswer[i] + '"]').innerHTML=jsonAnswer[i];
-                    console.log("Буква  " + keyKeybord.key + " = " + jsonAnswer[i]);
-                    console.log(jsonAnswer);
-                }   
+            keyClick = keyKeybord.key;
+            // console.log(keyClick);
+            if (keyClick == jsonAnswer[i]) {
+            document.querySelector('[data-answer="' + jsonAnswer[i] + '"]').innerHTML=jsonAnswer[i];
+            console.log("Буква  " + keyClick + " = " + jsonAnswer[i]);
+            console.log(jsonAnswer);
+            
+            summ++;
+            console.log(summ);
+
+        }     
+                  
         });
+        
 
     }
+    
+
+    
+
 console.log(jsonAnswer);
 
 
@@ -127,6 +140,7 @@ function addKeybord() {
        masKeybord.dataset.data=keyboardLetter[i];
        masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
        strKey1.append(masKeybord);
+       console.log("1 строка "+ keyboardLetter);
     }
     for (let i = 12; i < 23; i++) {
         let masKeybord = document.createElement('div');
