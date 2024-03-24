@@ -96,24 +96,49 @@ click();
 
 function click (){
 
-    document.addEventListener ('keypress', (keyKeybord) => {
-        document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
 
-        for (let i = 0; i < answer.length; i++) {
+
+    // document.addEventListener ('keypress', (keyKeybord) => {
+    //     document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+
+    //     for (let i = 0; i < answer.length; i++) {
     
-            if (keyKeybord.key == answer[i]) {
-                document.querySelector('[data-answer="' + answer[i] + '"]').innerHTML=answer[i];
-                console.log("Буква  " + keyKeybord.key + " = " + answer[i]);
-                console.log(answer);
-                 let clickKey=String.fromCharCode(answer[i]);
-                 console.log("clicKey" + clickKey);
-            }  else
-            {
-                Er++;
-                console.log(Er);
-            }   
+    //         if (keyKeybord.key == answer[i]) {
+    //             document.querySelector('[data-answer="' + answer[i] + '"]').innerHTML=answer[i];
+    //             console.log("Буква  " + keyKeybord.key + " = " + answer[i]);
+    //             console.log(answer);
+    //              let clickKey=String.fromCharCode(answer[i]);
+    //              console.log("clicKey" + clickKey);
+    //         }  else
+    //         {
+    //             Er++;
+    //             console.log(Er);
+    //         }   
+    //     }
+    // });
+
+    document.addEventListener('keydown',()=> {
+        for (let i = 0; i < answer.length; i++) {
+        if (event.key == answer[i]){
+            document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
+            element.innerHTML=answer[i];
+        });
+        console.log(event.key);
         }
-    });
+        
+        }
+        });
+    // document.addEventListener('keydown',()=> {
+    // for (let i = 0; i < answer.length; i++) {
+    //     if (event.key == answer[i]){
+    //          document.querySelector('[data-answer="' + answer[i] + '"]').innerHTML=answer[i];
+    //         console.log(event.key);
+    //     }
+        
+        
+    // }
+     
+    // })
 }
 // let word = ["m","a","s","s","i","v","s"];
 // let summ=0;
