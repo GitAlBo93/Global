@@ -15,6 +15,7 @@ let strKey2=document.createElement('div');
 let strKey3=document.createElement('div');
 let Er=3;
 let answer;
+let letCode;
 
 conteiner.className = "conteiner";
 document.body.prepend(conteiner);
@@ -84,9 +85,9 @@ async function go (){
         masAnswer.dataset.answer=jsonAnswer[i];
         word.append(masAnswer);
         
-    document.addEventListener ('keypress', (keyKeybord) => {
-        document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
-    });
+
+
+
     }
     
 
@@ -95,6 +96,8 @@ console.log(jsonAnswer);
   
 }
 click();
+
+
 
 function click (){
     document.addEventListener('keydown',()=> {
@@ -109,11 +112,12 @@ function click (){
             } 
         }
         if (!notEr){
-            Er--;
+            Er-=1;
             document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
         }
     });
 }
+
 
 
 go();
@@ -152,6 +156,26 @@ function addKeybord() {
 }
 addKeybord();
 
+document.addEventListener ('keypress', (keyKeybord) => {
+    document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+});
+
+function letKeyboard() {
+    for (let i = 0; i < keyboardLetter.length; i++) {
+        letCode=String.fromCharCode(keyboardLetter[i]);
+        console.log(letCode);
+    }
+    
+}
+letKeyboard();
+// document.querySelectorAll('.keyButton').forEach(function (element){
+//     element.onclick = function (){
+//         letCode = this.getAttribute('data-data');
+//         this.classList.add('active');
+//         console.log(letCode);
+//     }
+
+// });
 // document.addEventListener ('keypress', (keyKeybord) => {
 //     document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
 //     console.log(keyKeybord.key); 
