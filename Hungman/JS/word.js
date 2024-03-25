@@ -168,6 +168,9 @@ function letKeyboard() {
     
 }
 letKeyboard();
+
+//подсветка букв на виртуальной клавиатуре
+
 // document.querySelectorAll('.keyButton').forEach(function (element){
 //     element.onclick = function (){
 //         letCode = this.getAttribute('data-data');
