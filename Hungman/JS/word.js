@@ -13,7 +13,7 @@ let par3=document.createElement('p');
 let strKey1=document.createElement('div');
 let strKey2=document.createElement('div');
 let strKey3=document.createElement('div');
-let Er=0;
+let Er=3;
 let answer;
 
 conteiner.className = "conteiner";
@@ -84,7 +84,9 @@ async function go (){
         masAnswer.dataset.answer=jsonAnswer[i];
         word.append(masAnswer);
         
-
+    document.addEventListener ('keypress', (keyKeybord) => {
+        document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+    });
     }
     
 
@@ -95,62 +97,24 @@ console.log(jsonAnswer);
 click();
 
 function click (){
-
-
-
-    // document.addEventListener ('keypress', (keyKeybord) => {
-    //     document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
-
-    //     for (let i = 0; i < answer.length; i++) {
-    
-    //         if (keyKeybord.key == answer[i]) {
-    //             document.querySelector('[data-answer="' + answer[i] + '"]').innerHTML=answer[i];
-    //             console.log("Буква  " + keyKeybord.key + " = " + answer[i]);
-    //             console.log(answer);
-    //              let clickKey=String.fromCharCode(answer[i]);
-    //              console.log("clicKey" + clickKey);
-    //         }  else
-    //         {
-    //             Er++;
-    //             console.log(Er);
-    //         }   
-    //     }
-    // });
-
     document.addEventListener('keydown',()=> {
+        let notEr=false;
         for (let i = 0; i < answer.length; i++) {
-        if (event.key == answer[i]){
-            document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
-            element.innerHTML=answer[i];
-        });
-        console.log(event.key);
+            if (event.key == answer[i]){
+                document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
+                    element.innerHTML=answer[i];
+                });
+                console.log(event.key);
+                notEr = true;
+            } 
         }
-        
+        if (!notEr){
+            Er--;
+            document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
         }
-        });
-    // document.addEventListener('keydown',()=> {
-    // for (let i = 0; i < answer.length; i++) {
-    //     if (event.key == answer[i]){
-    //          document.querySelector('[data-answer="' + answer[i] + '"]').innerHTML=answer[i];
-    //         console.log(event.key);
-    //     }
-        
-        
-    // }
-     
-    // })
+    });
 }
-// let word = ["m","a","s","s","i","v","s"];
-// let summ=0;
-// let letter = "s";
 
-//     for (let j = 0; j < word.length; j++) {
-//     console.log(word[j]);
-//         if (word[j]== letter) {
-//         summ++;
-//             console.log(word[j] +"="+ letter);
-//         }
-// }    
 
 go();
 
