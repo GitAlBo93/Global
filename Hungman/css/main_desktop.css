@@ -117,6 +117,12 @@ flex-direction: row;
 }
 
 .active{
+    display: block;
     background-color: orange;
 }
 
+.par1,
+.par2,
+.par3 {
+    display: none;
+}

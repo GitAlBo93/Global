@@ -108,9 +108,6 @@ document.querySelectorAll('.keyButton').forEach(function (element){
         letCodeKey=this.getAttribute('data-key');
         this.classList.add('active');
         clickVirtKeyboard();
-        // console.log(letCodeKey);
-        // letKeyboard();
-        // console.log(letCode);
     }
 });
 
@@ -131,12 +128,10 @@ async function go (){
     answer=jsonAnswer;
     // document.getElementById("word").innerHTML=mass;
     // document.getElementById("word").innerHTML=mystery1.answer;
-
-    
     // console.log(jsonAnswer.length);
 
     for (let i = 0; i < jsonAnswer.length; i++) {
-        // const element = array[i];
+
         let masAnswer = document.createElement('div');
         masAnswer.className="masAnswer" + i;
         masAnswer.innerHTML="___";
@@ -146,23 +141,12 @@ async function go (){
 console.log(jsonAnswer);
 }
 click();
-// clickVirtKeyboard();
-
-// function letKeyboard() {
-//     for (let i = 0; i < keyboardLetter.length; i++) {
-//       letCodeVirt = String.fromCharCode(keyboardLetter[i]);
-//         // console.log(letCodeVirt);
-//     }
-// }
 
 function clickVirtKeyboard() {
-    // for (let i = 0; i < keyboardLetter.length; i++) {
-    //     letCode = String.fromCharCode(keyboardLetter[i]);
-    //     //   console.log("LetCode = " + letCode);
-    //   }
+
             let notEr=false;
             for (let i = 0; i < answer.length; i++) {
-                // console.log("Зашел в цикл сравнения букв = " + letCodeVirt);
+
                 if (letCodeKey == answer[i]){
                     document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
                         element.innerHTML=answer[i];
@@ -174,7 +158,7 @@ function clickVirtKeyboard() {
             }
             if (!notEr){
                 Er-=1;
-                document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
+                // document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
                 
             }
 }
@@ -194,14 +178,19 @@ function click (){
         }
         if (!notEr){
             Er-=1;
-            document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
-        }
+            
+       }
     });
 }
 
+document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
+console.log(Er);
 
 
-
+            if (Er==2) {
+            par1.classList.add('active');
+             console.log(Er);
+            }
 
 
 
