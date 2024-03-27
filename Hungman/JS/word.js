@@ -16,6 +16,11 @@ let strKey3=document.createElement('div');
 let Er=3;
 let answer;
 let letCode;
+let letCodeVirt;
+let letCodeKey;
+const keyboardLetter = [1081, 1094, 1091, 1082, 1077, 1085, 1075, 1096, 1097, 1079, 1093, 1098,
+    1092, 1099, 1074, 1072, 1087, 1088, 1086, 1083, 1076, 1078, 1101, 1103, 1095, 1089, 1084,
+     1080, 1090, 1100, 1073, 1102];
 
 conteiner.className = "conteiner";
 document.body.prepend(conteiner);
@@ -58,6 +63,59 @@ document.getElementById("parId1").innerHTML="Попытка 1";
 document.getElementById("parId2").innerHTML="Попытка 2";
 document.getElementById("parId3").innerHTML="Попытка 3";
 
+function addKeybord() {
+    for (let i = 0; i < 12; i++) {
+        let masKeybord = document.createElement('div');
+        masKeybord.className="keyButton";
+        masKeybord.id="keyButton"+[i];
+        masKeybord.dataset.data=keyboardLetter[i];
+        masKeybord.dataset.key=String.fromCharCode(keyboardLetter[i]);
+        masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
+        strKey1.append(masKeybord);
+        // console.log("1 строка "+ keyboardLetter);
+     }
+     for (let i = 12; i < 23; i++) {
+         let masKeybord = document.createElement('div');
+         masKeybord.className="keyButton";
+         masKeybord.id="keyButton"+[i];
+         masKeybord.dataset.data=keyboardLetter[i];
+         masKeybord.dataset.key=String.fromCharCode(keyboardLetter[i]);
+         masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
+         strKey2.append(masKeybord);
+     }
+     for (let i = 23; i < keyboardLetter.length; i++) {
+         let masKeybord = document.createElement('div');
+         masKeybord.className="keyButton";
+         masKeybord.id="keyButton"+[i];
+         masKeybord.dataset.data=keyboardLetter[i];
+         masKeybord.dataset.key=String.fromCharCode(keyboardLetter[i]);
+         masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
+         strKey3.append(masKeybord);
+     }
+ }
+ addKeybord();
+
+//подсветка физически нажатых букв
+document.addEventListener ('keypress', (keyKeybord) => {
+    document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
+});
+
+//подсветка букв на виртуальной клавиатуре
+document.querySelectorAll('.keyButton').forEach(function (element){
+    element.onclick = function (){
+
+        letCode = this.getAttribute('data-data');
+        letCodeKey=this.getAttribute('data-key');
+        this.classList.add('active');
+        clickVirtKeyboard();
+        // console.log(letCodeKey);
+        // letKeyboard();
+        // console.log(letCode);
+    }
+});
+
+go();
+
 async function responsed (){
     const resp = await fetch('json/mystery.json')
     return resp.json();
@@ -66,7 +124,7 @@ async function responsed (){
 async function go (){
   
     let jsonPars = await responsed();
-    console.log(jsonPars);
+    // console.log(jsonPars);
     let mystery1 = jsonPars[0];
     let jsonAnswer=Array.from(mystery1.answer);
     document.getElementById("mystery").innerHTML=mystery1.mystery;
@@ -75,7 +133,7 @@ async function go (){
     // document.getElementById("word").innerHTML=mystery1.answer;
 
     
-    console.log(jsonAnswer.length);
+    // console.log(jsonAnswer.length);
 
     for (let i = 0; i < jsonAnswer.length; i++) {
         // const element = array[i];
@@ -84,20 +142,42 @@ async function go (){
         masAnswer.innerHTML="___";
         masAnswer.dataset.answer=jsonAnswer[i];
         word.append(masAnswer);
-        
-
-
-
     }
-    
-
-
 console.log(jsonAnswer);
-  
 }
 click();
+// clickVirtKeyboard();
 
+// function letKeyboard() {
+//     for (let i = 0; i < keyboardLetter.length; i++) {
+//       letCodeVirt = String.fromCharCode(keyboardLetter[i]);
+//         // console.log(letCodeVirt);
+//     }
+// }
 
+function clickVirtKeyboard() {
+    // for (let i = 0; i < keyboardLetter.length; i++) {
+    //     letCode = String.fromCharCode(keyboardLetter[i]);
+    //     //   console.log("LetCode = " + letCode);
+    //   }
+            let notEr=false;
+            for (let i = 0; i < answer.length; i++) {
+                // console.log("Зашел в цикл сравнения букв = " + letCodeVirt);
+                if (letCodeKey == answer[i]){
+                    document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
+                        element.innerHTML=answer[i];
+
+                    });
+
+                    notEr = true;
+                } 
+            }
+            if (!notEr){
+                Er-=1;
+                document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
+                
+            }
+}
 
 function click (){
     document.addEventListener('keydown',()=> {
@@ -106,6 +186,7 @@ function click (){
             if (event.key == answer[i]){
                 document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
                     element.innerHTML=answer[i];
+                    
                 });
                 console.log(event.key);
                 notEr = true;
@@ -120,65 +201,17 @@ function click (){
 
 
 
-go();
 
 
-const keyboardLetter = [1081, 1094, 1091, 1082, 1077, 1085, 1075, 1096, 1097, 1079, 1093, 1098,
-    1092, 1099, 1074, 1072, 1087, 1088, 1086, 1083, 1076, 1078, 1101, 1103, 1095, 1089, 1084,
-     1080, 1090, 1100, 1073, 1102];
 
-function addKeybord() {
-   for (let i = 0; i < 12; i++) {
-       let masKeybord = document.createElement('div');
-       masKeybord.className="keyButton";
-       masKeybord.id="keyButton"+[i];
-       masKeybord.dataset.data=keyboardLetter[i];
-       masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
-       strKey1.append(masKeybord);
-       console.log("1 строка "+ keyboardLetter);
-    }
-    for (let i = 12; i < 23; i++) {
-        let masKeybord = document.createElement('div');
-        masKeybord.className="keyButton";
-        masKeybord.id="keyButton"+[i];
-        masKeybord.dataset.data=keyboardLetter[i];
-        masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
-        strKey2.append(masKeybord);
-    }
-    for (let i = 23; i < keyboardLetter.length; i++) {
-        let masKeybord = document.createElement('div');
-        masKeybord.className="keyButton";
-        masKeybord.id="keyButton"+[i];
-        masKeybord.dataset.data=keyboardLetter[i];
-        masKeybord.innerHTML=String.fromCharCode(keyboardLetter[i]);
-        strKey3.append(masKeybord);
-    }
-}
-addKeybord();
 
-document.addEventListener ('keypress', (keyKeybord) => {
-    document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
-});
 
-function letKeyboard() {
-    for (let i = 0; i < keyboardLetter.length; i++) {
-        letCode=String.fromCharCode(keyboardLetter[i]);
-        console.log(letCode);
-    }
-    
-}
-letKeyboard();
 
-//подсветка букв на виртуальной клавиатуре
 
-// document.querySelectorAll('.keyButton').forEach(function (element){
-//     element.onclick = function (){
-//         letCode = this.getAttribute('data-data');
-//         this.classList.add('active');
-//         console.log(letCode);
-//     }
 
-// });
+
+
+
 // document.addEventListener ('keypress', (keyKeybord) => {
 //     document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
 //     console.log(keyKeybord.key); 
