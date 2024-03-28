@@ -116,13 +116,14 @@ flex-direction: row;
     font-size: 46px;
 }
 
-.active{
-    display: block;
-    background-color: orange;
-}
+
 
 .par1,
 .par2,
 .par3 {
     display: none;
+}
+.active{
+    display: block;
+    background-color: orange;
 }

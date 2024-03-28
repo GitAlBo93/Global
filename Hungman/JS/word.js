@@ -107,7 +107,7 @@ document.querySelectorAll('.keyButton').forEach(function (element){
         letCode = this.getAttribute('data-data');
         letCodeKey=this.getAttribute('data-key');
         this.classList.add('active');
-        clickVirtKeyboard();
+        clickKeyboard(letCodeKey);
     }
 });
 
@@ -117,6 +117,27 @@ async function responsed (){
     const resp = await fetch('json/mystery.json')
     return resp.json();
   }
+
+//   document.addEventListener("DOMContentLoaded", function() {
+//     const getRiddleBtn = document.getElementById("getRiddleBtn");
+//     const riddleElement = document.getElementById("riddle");
+  
+//     // Обработчик события клика на кнопку
+//     getRiddleBtn.addEventListener("click", function() {
+//       // Загружаем данные из JSON файла
+//       fetch("riddles.json")
+//         .then(response => response.json())
+//         .then(data => {
+//           // Выбираем случайную загадку из загруженных данных
+//           const randomIndex = Math.floor(Math.random() * data.length);
+//           const randomRiddle = data[randomIndex].riddle;
+  
+//           // Отображаем загадку на странице
+//           riddleElement.textContent = randomRiddle;
+//         })
+//         .catch(error => console.error("Error fetching riddles:", error));
+//     });
+//   });
 
 async function go (){
   
@@ -140,66 +161,79 @@ async function go (){
     }
 console.log(jsonAnswer);
 }
-click();
 
-function clickVirtKeyboard() {
+document.addEventListener('keydown',()=>clickKeyboard(event.key));
 
-            let notEr=false;
-            for (let i = 0; i < answer.length; i++) {
-
-                if (letCodeKey == answer[i]){
-                    document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
-                        element.innerHTML=answer[i];
-
-                    });
-
-                    notEr = true;
-                } 
-            }
-            if (!notEr){
-                Er-=1;
-                // document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
-                
-            }
-}
-
-function click (){
-    document.addEventListener('keydown',()=> {
-        let notEr=false;
-        for (let i = 0; i < answer.length; i++) {
-            if (event.key == answer[i]){
-                document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
-                    element.innerHTML=answer[i];
-                    
-                });
-                console.log(event.key);
-                notEr = true;
-            } 
-        }
-        if (!notEr){
-            Er-=1;
-            
-       }
-    });
-}
-
-document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
-console.log(Er);
-
-
-            if (Er==2) {
+function clickKeyboard(clickKey) {
+    let notEr=false;
+    for (let i = 0; i < answer.length; i++) {
+        if (clickKey == answer[i]){
+            document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
+                element.innerHTML=answer[i];
+            });
+            notEr = true;
+        } 
+    }
+    if (!notEr){
+        Er-=1;
+        document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
+        if (Er==2) {
             par1.classList.add('active');
-             console.log(Er);
-            }
+        } else
+        if (Er==1) {
+            par2.classList.add('active');
+        }else
+        if (Er==0) {
+            par3.classList.add('active');
+        }else
+        Er=3;
+    }
+}
+
+// click();
+
+// function clickVirtKeyboard() {
+//             let notEr=false;
+//             for (let i = 0; i < answer.length; i++) {
+//                 if (letCodeKey == answer[i]){
+//                     document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
+//                         element.innerHTML=answer[i];
+//                     });
+//                     notEr = true;
+//                 } 
+//             }
+//             if (!notEr){
+//                 Er-=1;
+//                 document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
+//                 if (Er==2) {
+//                     par1.classList.add('active');
+//                      console.log(Er);
+//                     }
+//             }
+// }            
 
 
+// function click (){
+//     document.addEventListener('keydown',()=> {
+//         let notEr=false;
+//         for (let i = 0; i < answer.length; i++) {
+//             if (event.key == answer[i]){
+//                 document.querySelectorAll('[data-answer="' + answer[i] + '"]').forEach(element => {
+//                     element.innerHTML=answer[i];
+                    
+//                 });
+//                 console.log(event.key);
+//                 notEr = true;
+//             } 
+//         }
+//         if (!notEr){
+//             Er-=1;
+            
+//        }
+//     });
+// }
 
-
-
-
-
-
-
+// document.getElementById('attempts').innerHTML="Осталось попыток: "+ Er;
 
 // document.addEventListener ('keypress', (keyKeybord) => {
 //     document.querySelector('[data-data="' + keyKeybord.keyCode + '"]').classList.add('active');
